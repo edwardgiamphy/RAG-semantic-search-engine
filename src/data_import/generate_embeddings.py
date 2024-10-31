@@ -22,7 +22,7 @@ df['summary_embedding'] = df['summary'].apply(create_embedding)
 df['content_embedding'] = df['content'].apply(create_embedding)
 
 # Save the updated dataset to a new CSV file
-output_file_path = "data/processed/aarticles_with_embeddings.csv"
+output_file_path = "data/processed/articles_with_embeddings.csv"
 df.to_csv(output_file_path, index=False)
 
 print(f"Embeddings generated and saved to {output_file_path}")

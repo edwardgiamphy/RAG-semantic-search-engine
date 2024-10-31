@@ -12,10 +12,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Run data processing scripts to set up FAISS index and embeddings
-RUN python src/data_import/fetch_rss.py
-RUN python src/data_import/create_dataset.py
-RUN python src/data_import/generate_embeddings.py
-RUN python src/data_import/store_embeddings_faiss.py
+# RUN python src/data_import/fetch_rss.py
+# RUN python src/data_import/create_dataset.py
+# RUN python src/data_import/generate_embeddings.py
+# RUN python src/data_import/store_embeddings_faiss.py
 
 # Expose ports for FastAPI (8000) and the frontend (8001)
 EXPOSE 8000

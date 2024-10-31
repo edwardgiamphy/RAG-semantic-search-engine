@@ -1,8 +1,9 @@
 # Makefile for the semantic-search-ekg project
 
 # Docker commands
+
 build:
-	mkdir data data/external data/interim data/processed data/raw && docker-compose build
+	docker-compose build
 
 up:
 	docker-compose up
@@ -11,6 +12,12 @@ down:
 	docker-compose down
 
 # Run individual data processing steps locally (optional)
+create-data-folder:
+	mkdir data data/external data/interim data/processed data/raw
+
+fetch-data:
+	python src/data_import/fetch_rss.py
+
 create-dataset:
 	python src/data_import/create_dataset.py
 

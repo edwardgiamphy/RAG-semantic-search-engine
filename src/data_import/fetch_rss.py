@@ -4,6 +4,22 @@ import feedparser
 import json
 
 url = "https://www.public.fr/people/feed"
+
+
+feed = feedparser.parse(url)
+
+articles = []
+
+for entry in feed.entries:
+    articles.append({
+        "title": entry.title,
+        "summary": entry.summary,
+        "content": entry.get("content", [{}])[0].get("value", "")
+    })
+
+with open("data/raw/articles.json", "w", encoding="utf-8") as f:
+    json.dump(articles, f, ensure_ascii=False, indent=4)
+
 url = "https://vsd.fr/actu-people/feed/"
 
 feed = feedparser.parse(url)
@@ -17,6 +33,5 @@ for entry in feed.entries:
         "content": entry.get("content", [{}])[0].get("value", "")
     })
 
-with open("articles2.json", "w", encoding="utf-8") as f:
+with open("data/raw/articles2.json", "w", encoding="utf-8") as f:
     json.dump(articles, f, ensure_ascii=False, indent=4)
-

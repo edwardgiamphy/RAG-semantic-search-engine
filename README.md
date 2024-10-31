@@ -94,7 +94,7 @@ Then you may want to run the tests in the conda environment (look above for more
 
 ### 1. Install Dependencies
 
-To set up the environment, ensure that you have Docker installed. Then, build and run the Docker containers.
+To set up the environment, ensure that you have Docker installed. Then, build and run the Docker containers:
 ```
 make build
 make up
@@ -105,6 +105,12 @@ The application will be available at:
 
 Backend API: http://localhost:8000
 Frontend: http://localhost:8001
+
+Then you can open the frontend to enter a search query:
+```
+make open-browser
+```
+
 ### 2. Running Data Processing Scripts
 To manually run data processing scripts without Docker (optional):
 ```

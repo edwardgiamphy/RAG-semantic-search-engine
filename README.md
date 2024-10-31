@@ -27,7 +27,6 @@ Data Processing Commands:
 - 'generate-embeddings': Runs the script to generate embeddings.
 - 'store-faiss-index': Stores the embeddings in FAISS for future search.
 
-
 Cleanup:
 - 'clean': Deletes any processed files in 'data/processed'.
 
@@ -75,6 +74,23 @@ Documentation:
     └── tests            <- A few tests to check that some functionalities of the project workflow are healthy
 
 ## Setup Instructions
+### 0. Project quick use (optional)
+For quick use, you may want to run individual data processing steps locally into a conda environment. If so, run :
+```
+conda create -n "search" python=3.10.14
+conda activate search
+pip install -r requirements.txt
+```
+Then install run the data processing steps:
+```
+make create-data-folder
+make fetch-data
+make create-dataset
+make generate-embeddings
+make store-faiss-index
+```
+
+Then you may want to run the tests in the conda environment (look above for more details).
 
 ### 1. Install Dependencies
 

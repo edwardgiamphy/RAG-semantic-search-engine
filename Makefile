@@ -2,7 +2,7 @@
 
 # Docker commands
 build:
-	docker-compose build
+	mkdir data data/external data/interim data/processed data/raw && docker-compose build
 
 up:
 	docker-compose up

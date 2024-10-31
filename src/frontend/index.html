@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #search-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .result {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .result h2 {
+            margin: 0;
+        }
+        .result p {
+            margin: 5px 0;
+        }
+        .score {
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="search-container">
+        <input type="text" id="query" placeholder="Enter your search query..." />
+        <button onclick="performSearch()">Search</button>
+    </div>
+    
+    <div id="results"></div>
+
+    <script>
+        async function performSearch() {
+            const query = document.getElementById("query").value;
+            const resultsContainer = document.getElementById("results");
+            resultsContainer.innerHTML = ""; // Clear previous results
+
+            if (!query) {
+                resultsContainer.innerHTML = "<p>Please enter a query.</p>";
+                return;
+            }
+
+            try {
+                // Send query to the backend API
+                const response = await fetch("http://127.0.0.1:8000/search", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ query: query })
+                });
+
+                const data = await response.json();
+
+                // Display the results
+                resultsContainer.innerHTML = `<h3>Results for "${data.query}":</h3>`;
+
+                data.results.slice(0, 5).forEach((result, index) => {
+                    resultsContainer.innerHTML += `
+                        <div class="result">
+                            <h2>${index + 1}. ${result.title}</h2>
+                            <p><strong>Summary:</strong> ${result.summary}</p>
+                            <p><strong>Content:</strong> ${result.content}</p>
+                            <p class="score">Relevance Score: ${result.score.toFixed(2)}</p>
+                            <a href="${result.url}" target="_blank">Read more</a>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                resultsContainer.innerHTML = "<p>Error fetching results. Please try again later.</p>";
+                console.error("Error:", error);
+            }
+        }
+    </script>
+</body>
+</html>

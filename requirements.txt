@@ -1,0 +1,18 @@
+fastapi==0.85.1              # FastAPI for building the backend
+uvicorn==0.18.3              # ASGI server to run FastAPI apps
+# uvicorn
+sentence-transformers==2.2.2 # For embedding generation (includes Hugging Face Transformers)
+faiss-cpu==1.7.2             # For similarity search (CPU version)
+newspaper3k==0.2.8           # For web scraping and parsing articles
+requests==2.26.0             # For making HTTP requests
+huggingface-hub==0.8.1
+scikit-learn
+numpy<2.0
+pandas
+# Frontend
+jinja2==3.0.3                # For HTML templating (if needed in FastAPI)
+# Testing
+pytest==7.1.2                # Testing framework
+pytest-asyncio==0.16.0       # For async tests in FastAPI
+anyio==3.6.2
+httpx==0.23.0
